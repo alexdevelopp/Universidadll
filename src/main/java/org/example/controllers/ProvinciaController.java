@@ -1,14 +1,11 @@
 package org.example.controllers;
 
 import org.example.clases.Provincia;
-import org.example.dtos.provincias.CreateDto;
+import org.example.dtos.provincias.CreateDtoProvincia;
 import org.example.services.ProvinciaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/provincias")
@@ -35,12 +32,12 @@ public class ProvinciaController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> create(@RequestBody CreateDto createDto){
-        provinciaService.add(new Provincia(createDto.nombre()));
+    public ResponseEntity<?> create(@RequestBody CreateDtoProvincia createDtoProvincia){
+        provinciaService.add(new Provincia(createDtoProvincia.nombre()));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id,@RequestBody CreateDto dto){
+    public ResponseEntity<?> update(@PathVariable Integer id,@RequestBody CreateDtoProvincia dto){
         var provincia = provinciaService.find(id);
         if(provincia == null)
             return new ResponseEntity<>("No se encontró la provincia",HttpStatus.NOT_FOUND);

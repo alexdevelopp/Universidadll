@@ -1,23 +1,25 @@
 package org.example.clases;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties(value= {"profesores","alumnos","asignaturas"})
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cursoId;
     private String nombre;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "departamentoId")
     private Departamento departamento;
-    @OneToMany(mappedBy = "cursoId",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cursoId",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Alumno> alumnos;
-    @ManyToMany(mappedBy = "cursos",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "cursos",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Profesor> profesores;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(
             name = "curso_asignatura",
             joinColumns = @JoinColumn(name = "curso_id"),

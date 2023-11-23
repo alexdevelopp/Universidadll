@@ -1,10 +1,12 @@
 package org.example.clases;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties(value= {"cursos","asignaturas"})
 public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,14 +15,14 @@ public class Profesor {
     @ManyToOne
     @JoinColumn(name = "provincia_id")
     private Provincia provincia_id;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(
             name = "curso_profesor",
             joinColumns = @JoinColumn(name = "profesor_id"),
             inverseJoinColumns = @JoinColumn(name = "curso_id")
     )
     private List<Curso> cursos;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinTable(
             name = "asignatura_profesor",
             joinColumns = @JoinColumn(name = "profesor_id"),

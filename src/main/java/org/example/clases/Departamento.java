@@ -1,9 +1,11 @@
 package org.example.clases;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
 @Entity
+@JsonIgnoreProperties(value= {"cursos"})
 public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
