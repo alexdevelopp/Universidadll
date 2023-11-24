@@ -1,4 +1,4 @@
 package org.example.dtos.asignatura;
 
-public record AsignaturaDto() {
+public record AsignaturaDto(Integer id, String nombre) {
 }

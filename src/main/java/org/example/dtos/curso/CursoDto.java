@@ -1,4 +1,6 @@
 package org.example.dtos.curso;
 
-public record CursoDto() {
+import org.example.clases.Departamento;
+
+public record CursoDto(Integer id, String nombre, Departamento departamento) {
 }
