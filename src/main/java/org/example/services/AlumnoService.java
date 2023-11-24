@@ -101,7 +101,7 @@ public class AlumnoService implements MyInterfaceBBDD<Alumno> {
     public List<Alumno> findAll() {
         setUp();
         try {
-            return em.createQuery("SELECT * FROM alumno",Alumno.class).getResultList();
+            return em.createQuery("SELECT a FROM Alumno a",Alumno.class).getResultList();
         } catch (PersistenceException e) {
             e.printStackTrace();
         } finally {

@@ -46,7 +46,7 @@ public class ProvinciaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id){
         var provincia = provinciaService.find(id);
         if(provincia == null)
             return new ResponseEntity<>("No se encontró la provincia",HttpStatus.NOT_FOUND);

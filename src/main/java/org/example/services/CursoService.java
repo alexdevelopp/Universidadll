@@ -101,7 +101,7 @@ public class CursoService implements MyInterfaceBBDD<Curso> {
     public List<Curso> findAll() {
         setUp();
         try {
-            return em.createQuery("SELECT * FROM curso",Curso.class).getResultList();
+            return em.createQuery("SELECT c FROM Curso c",Curso.class).getResultList();
         } catch (PersistenceException e) {
             e.printStackTrace();
         } finally {
