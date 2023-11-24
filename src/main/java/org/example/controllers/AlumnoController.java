@@ -1,9 +1,7 @@
 package org.example.controllers;
 
 import org.example.clases.Alumno;
-import org.example.clases.Profesor;
-import org.example.dtos.alumnos.CreateDtoAlumno;
-import org.example.dtos.profesor.CreateDtoProfesor;
+import org.example.dtos.alumno.CreateDtoAlumno;
 import org.example.services.AlumnoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

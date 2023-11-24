@@ -9,9 +9,9 @@ import java.util.List;
 public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int departamentoId;
+    private int id;
     private String nombre;
-    @OneToMany(mappedBy = "departamento",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "departamento",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     private List<Curso> cursos;
 
     public Departamento() {
@@ -23,11 +23,11 @@ public class Departamento {
     }
 
     public int getId() {
-        return departamentoId;
+        return id;
     }
 
     public void setId(int id) {
-        this.departamentoId = id;
+        this.id = id;
     }
 
     public String getNombre() {

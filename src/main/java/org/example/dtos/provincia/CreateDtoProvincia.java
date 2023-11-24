@@ -1,4 +1,4 @@
-package org.example.dtos.provincias;
+package org.example.dtos.provincia;
 
 public record CreateDtoProvincia(String nombre) {
 }

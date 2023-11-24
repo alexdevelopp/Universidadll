@@ -8,27 +8,27 @@ import jakarta.persistence.*;
 public class Alumno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int alumnoId;
+    private int id;
     private String nombre;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cursoId")
-    private Curso cursoId;
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
 
     public Alumno() {
         super();
     }
 
-    public Alumno(String nombre, Curso cursoId) {
+    public Alumno(String nombre, Curso curso) {
         this.nombre = nombre;
-        this.cursoId = cursoId;
+        this.curso = curso;
     }
 
     public int getId() {
-        return alumnoId;
+        return id;
     }
 
     public void setId(int id) {
-        this.alumnoId = id;
+        this.id = id;
     }
 
     public String getNombre() {
@@ -40,10 +40,10 @@ public class Alumno {
     }
 
     public Curso getCursoId() {
-        return cursoId;
+        return curso;
     }
 
     public void setCursoId(Curso cursoId) {
-        this.cursoId = cursoId;
+        this.curso = curso;
     }
 }

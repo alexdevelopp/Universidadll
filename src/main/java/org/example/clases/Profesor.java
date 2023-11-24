@@ -6,23 +6,23 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties(value= {"cursos","asignaturas"})
+@JsonIgnoreProperties(value= {"cursos","asignaturas","provincia"})
 public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int profesorId;
+    private int id;
     private String nombre;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn(name = "provincia_id")
-    private Provincia provincia_id;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Provincia provincia;
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinTable(
             name = "curso_profesor",
             joinColumns = @JoinColumn(name = "profesor_id"),
             inverseJoinColumns = @JoinColumn(name = "curso_id")
     )
     private List<Curso> cursos;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinTable(
             name = "asignatura_profesor",
             joinColumns = @JoinColumn(name = "profesor_id"),
@@ -34,25 +34,25 @@ public class Profesor {
         super();
     }
 
-    public Profesor( String nombre, Provincia provincia_id) {
+    public Profesor( String nombre, Provincia provincia) {
         this.nombre = nombre;
-        this.provincia_id = provincia_id;
+        this.provincia = provincia;
     }
 
-    public Provincia getProvincia_id() {
-        return provincia_id;
+    public Provincia getProvincia() {
+        return provincia;
     }
 
-    public void setProvincia_id(Provincia provincia_id) {
-        this.provincia_id = provincia_id;
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 
     public int getId() {
-        return profesorId;
+        return id;
     }
 
     public void setId(int id) {
-        this.profesorId = id;
+        this.id = id;
     }
 
     public String getNombre() {

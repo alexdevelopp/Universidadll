@@ -11,11 +11,11 @@ import java.util.List;
 public class Asignatura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int asignaturaId;
+    private int id;
     private String nombre;
-    @ManyToMany(mappedBy = "asignaturas",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "asignaturas",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     private List<Curso> cursos;
-    @ManyToMany(mappedBy = "asignaturas",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "asignaturas",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     private List<Profesor>profesores;
 
     public Asignatura() {
@@ -27,11 +27,11 @@ public class Asignatura {
     }
 
     public int getId() {
-        return asignaturaId;
+        return id;
     }
 
     public void setId(int id) {
-        this.asignaturaId = id;
+        this.id = id;
     }
 
     public String getNombre() {

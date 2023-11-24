@@ -11,9 +11,9 @@ import java.util.List;
 public class Provincia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int provinciaId;
+    private int id;
     private String nombre;
-    @OneToMany(mappedBy = "provincia_id",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "provincia",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     private List<Profesor> profesores;
 
     public Provincia() {
@@ -25,11 +25,11 @@ public class Provincia {
     }
 
     public int getId() {
-        return provinciaId;
+        return id;
     }
 
     public void setId(int id) {
-        this.provinciaId = id;
+        this.id = id;
     }
 
     public String getNombre() {

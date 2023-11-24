@@ -6,20 +6,20 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@JsonIgnoreProperties(value= {"profesores","alumnos","asignaturas"})
+@JsonIgnoreProperties(value= {"profesores","alumnos","asignaturas","departamento"})
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cursoId;
+    private int id;
     private String nombre;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "departamentoId")
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn(name = "departamento_id")
     private Departamento departamento;
-    @OneToMany(mappedBy = "cursoId",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "curso",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     private List<Alumno> alumnos;
-    @ManyToMany(mappedBy = "cursos",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "cursos",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     private List<Profesor> profesores;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinTable(
             name = "curso_asignatura",
             joinColumns = @JoinColumn(name = "curso_id"),
@@ -37,11 +37,11 @@ public class Curso {
     }
 
     public int getId() {
-        return cursoId;
+        return id;
     }
 
     public void setId(int id) {
-        this.cursoId = id;
+        this.id = id;
     }
 
     public String getNombre() {

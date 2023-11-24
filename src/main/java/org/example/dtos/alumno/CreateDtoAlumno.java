@@ -1,4 +1,4 @@
-package org.example.dtos.alumnos;
+package org.example.dtos.alumno;
 
 import org.example.clases.Curso;
 

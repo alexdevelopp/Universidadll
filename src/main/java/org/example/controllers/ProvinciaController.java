@@ -1,7 +1,7 @@
 package org.example.controllers;
 
 import org.example.clases.Provincia;
-import org.example.dtos.provincias.CreateDtoProvincia;
+import org.example.dtos.provincia.CreateDtoProvincia;
 import org.example.services.ProvinciaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
