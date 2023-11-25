@@ -1,0 +1,8 @@
+.eliminar {
+    background-color: red !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 8px 12px !important;
+    cursor: pointer !important;
+}
