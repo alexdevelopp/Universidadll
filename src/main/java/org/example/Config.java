@@ -2,7 +2,6 @@ package org.example;
 
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.cors.*;
 
 @Configuration
 public class Config implements WebMvcConfigurer {

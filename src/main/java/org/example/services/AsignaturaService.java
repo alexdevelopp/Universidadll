@@ -6,8 +6,6 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceException;
 import org.example.MyInterfaceBBDD;
 import org.example.clases.Asignatura;
-import org.example.clases.Profesor;
-import org.example.clases.Provincia;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

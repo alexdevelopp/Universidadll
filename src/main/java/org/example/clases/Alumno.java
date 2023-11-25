@@ -39,11 +39,11 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public Curso getCursoId() {
+    public Curso getCurso() {
         return curso;
     }
 
-    public void setCursoId(Curso cursoId) {
+    public void setCurso(Curso curso) {
         this.curso = curso;
     }
 }

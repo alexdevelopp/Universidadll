@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles.css/grid.css'
-import '../styles.css/button.css'
+import '../../styles.css/grid.css'
+import '../../styles.css/button.css'
+import FormProvincia from '../Forms/FormProvincia';
 
 
 const ProvinciasComponent = () => {
   // Estado para almacenar la lista de provincias
   const [provincias, setProvincias] = useState([]);
 
-  // Efecto para realizar la solicitud al cargar el componente
-  useEffect(() => {
     // Función para obtener la lista de provincias
     const getAllProvincias = async () => {
       try {
@@ -20,6 +19,9 @@ const ProvinciasComponent = () => {
         console.error('Error al obtener la lista de provincias:', error);
       }
     };
+
+  // Efecto para realizar la solicitud al cargar el componente
+  useEffect(() => {
     // Llamar a la función para obtener las provincias
     getAllProvincias();
   },[]); 
@@ -52,7 +54,7 @@ const ProvinciasComponent = () => {
 
   return (
     <div className='grid-container'>
-    <h2>Lista de Provincias</h2>
+    <h2 className='title-grid'>Lista de Provincias</h2>
     <div className="grid-wrapper">
       <table className="my-grid">
         <thead>
@@ -79,6 +81,7 @@ const ProvinciasComponent = () => {
         </tbody>
       </table>
     </div>
+    <FormProvincia getAllProvincias={getAllProvincias} />
   </div>
   );
 };

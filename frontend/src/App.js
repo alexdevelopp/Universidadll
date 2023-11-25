@@ -1,13 +1,15 @@
-import './App.css';
-import ProvinciasComponent from './components/Provincias';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ProvinciasView from './views/ProvinciasView';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-    <ProvinciasComponent>
-    </ProvinciasComponent>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/provincia" element={<ProvinciasView />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
