@@ -13,8 +13,6 @@
     box-sizing: border-box;
   }
   
-
-  
   .my-grid {
     width: 100%;
     border-collapse: collapse;
@@ -32,3 +30,4 @@
     text-decoration: underline;
     font-weight: bold;
   }
+

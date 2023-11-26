@@ -8,6 +8,9 @@ import FormProvincia from '../Forms/FormProvincia';
 const ProvinciasComponent = () => {
   // Estado para almacenar la lista de provincias
   const [provincias, setProvincias] = useState([]);
+  const [provinciaToEdit, setProvinciaToEdit] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+
 
     // Función para obtener la lista de provincias
     const getAllProvincias = async () => {
@@ -26,6 +29,32 @@ const ProvinciasComponent = () => {
     getAllProvincias();
   },[]); 
 
+    //Funcion que crea una provincia 
+    const addProvincia = async (nombre) => {
+      try {
+        const response = await axios.post('http://localhost:8080/api/provincias', { nombre });
+        console.log('Solicitud POST exitosa:', response.data);
+        getAllProvincias();
+      } catch (error) {
+        console.error('Error al hacer la solicitud POST:', error);
+      }
+    };
+
+      //Funcion que modifica una provincia 
+  const updateProvincia = async (id, newProvincia) => {
+    try {
+        // Realizar la solicitud PUT con Axios
+        const response = await axios.put(
+          `http://localhost:8080/api/provincias/${provinciaToEdit.id}`,
+          newProvincia
+        );
+        getAllProvincias();
+        console.log('Solicitud PUT exitosa:', response.data);
+    } catch (error) {
+      console.error('Error al hacer la solicitud PUT:', error);
+    }
+  };
+
   //Funcion para solicitar borrar una provincia.
   const deleteProvincia = async (id) => {
     try {
@@ -39,6 +68,15 @@ const ProvinciasComponent = () => {
       console.error('Error al eliminar la provincia:', error);
     }
   };
+
+  // Cuando le damos a modificar en el grid
+  const handleEdit = (id) => {
+    const provincia = provincias.find((provincia) => provincia.id === id);
+    setProvinciaToEdit(provincia);
+    setIsEditing(true);
+  };
+
+  //Mostrar datos en el grid
 
   const columns = [
     { key: 'id', name: 'ID' },
@@ -76,12 +114,17 @@ const ProvinciasComponent = () => {
                   Eliminar
                 </button>
               </td>
+              <td>
+            <button onClick={() => handleEdit(row.id)} className="edit-item">
+              Modificar
+            </button>
+          </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-    <FormProvincia getAllProvincias={getAllProvincias} />
+    <FormProvincia addProvincia={addProvincia} updateProvincia={updateProvincia} provinciaToEdit={provinciaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
   </div>
   );
 };

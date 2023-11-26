@@ -18,3 +18,23 @@
         cursor: pointer;
         border: none;
 }
+
+.cancel-form {
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        border: none;
+}
+
+.edit-item {
+    background-color: rgb(8, 187, 8);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+}
