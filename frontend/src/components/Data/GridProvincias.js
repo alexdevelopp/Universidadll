@@ -11,7 +11,6 @@ const GridProvincias = ({service,provincias,setProvincias,provinciaToEdit,setPro
   useEffect(() => {
     const updateGrid = async () => {
       try {
-        console.log('Actualizando grid...');
         const data = await service.getAll('api/provincias');
         setProvincias(data)
       } catch (error) {
