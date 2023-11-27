@@ -3,7 +3,9 @@ import '../../styles.css/form.css'
 import '../../styles.css/button.css'
 
 
-const FormProvincia = ({updateProvincia,addProvincia,provinciaToEdit,isEditing,setIsEditing}) => {
+
+const FormProvincia = ({service,provinciaToEdit,isEditing,setIsEditing,setProvincias}) => {
+  
   const [name, setName] = useState('');
 
   useEffect(() => {
@@ -17,15 +19,21 @@ const FormProvincia = ({updateProvincia,addProvincia,provinciaToEdit,isEditing,s
     setName(event.target.value);
   };
 
-
   //Cuando se lanza el formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
     const newProvincia = {nombre: name}
     if (isEditing) {
-      await updateProvincia(provinciaToEdit.id,newProvincia);
+      await service.update('api/provincias',provinciaToEdit.id,newProvincia);
+      const updatedProvincias = await service.getAll('api/provincias');
+      console.log("Modificacion conseguida!")
+      setProvincias(updatedProvincias);
+      setIsEditing(false)
     } else {
-      await addProvincia(name);
+      await service.create('api/provincias',newProvincia); 
+      console.log("Insertacion conseguida!")
+      const updatedProvincias = await service.getAll('api/provincias');
+      setProvincias(updatedProvincias);
     }
     setName('');
   };
