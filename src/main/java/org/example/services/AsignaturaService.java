@@ -99,7 +99,9 @@ public class AsignaturaService implements MyInterfaceBBDD<Asignatura> {
     public List<Asignatura> findAll() {
         setUp();
         try {
-            return em.createQuery("SELECT a FROM Asignatura a",Asignatura.class).getResultList();
+            List<Asignatura> asignaturas = em.createQuery("SELECT a FROM Asignatura a",Asignatura.class).getResultList();
+            asignaturas.size();
+            return asignaturas;
         } catch (PersistenceException e) {
             e.printStackTrace();
         } finally {

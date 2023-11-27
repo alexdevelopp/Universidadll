@@ -1,8 +1,11 @@
 package org.example.controllers;
 
+import java.util.ArrayList;
+
 import org.example.clases.Curso;
 import org.example.dtos.curso.CreateDtoCurso;
 import org.example.services.CursoService;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +22,13 @@ public class CursoController {
 
     @GetMapping("")
     public ResponseEntity<?> getAll(){
-        return new ResponseEntity<>(cursoService.findAll(), HttpStatus.OK);
+        var cursos = cursoService.findAll();
+        List<CreateDtoCurso> cursosDtoList = new ArrayList<>();
+        for (Curso curso : cursos) {
+            var dto = new CreateDtoCurso(curso.getNombre(), curso.getDepartamento());
+            cursosDtoList.add(dto);
+        }
+        return new ResponseEntity<>(cursosDtoList, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

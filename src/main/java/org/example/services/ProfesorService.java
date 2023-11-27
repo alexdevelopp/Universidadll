@@ -99,7 +99,9 @@ public class ProfesorService implements MyInterfaceBBDD<Profesor> {
     public List<Profesor> findAll() {
         setUp();
         try {
-            return em.createQuery("SELECT p FROM Profesor p",Profesor.class).getResultList();
+            List<Profesor> profesores = em.createQuery("SELECT p FROM Profesor p",Profesor.class).getResultList();
+            profesores.size();
+            return profesores;
         } catch (PersistenceException e) {
             e.printStackTrace();
         } finally {

@@ -1,5 +1,8 @@
 package org.example.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.example.clases.Profesor;
 import org.example.dtos.profesor.CreateDtoProfesor;
 import org.example.services.ProfesorService;
@@ -19,7 +22,13 @@ public class ProfesorController {
 
     @GetMapping("")
     public ResponseEntity<?> getAll(){
-        return new ResponseEntity<>(profesorService.findAll(), HttpStatus.OK);
+        var profesores = profesorService.findAll();
+        List<CreateDtoProfesor> profesoresDto = new ArrayList<>();
+        for (Profesor profesor : profesores) {
+            var dto = new CreateDtoProfesor(profesor.getId(),profesor.getNombre(),profesor.getProvincia());
+            profesoresDto.add(dto);
+        }
+        return new ResponseEntity<>(profesoresDto, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

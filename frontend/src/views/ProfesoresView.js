@@ -1,8 +1,7 @@
 import ApiService from '../components/Api/ApiService';
 import Constants from '../components/Api/Constants';
 import GridProfesores from '../components/Data/GridProfesores';
-import GridProvincias from '../components/Data/GridProvincias';
-import FormProvincia from '../components/Forms/FormProvincia';
+import FormProfesores from '../components/Forms/FormProfesores';
 import '../styles.css/views.css/provinciaView.css';
 import { useState} from 'react';
 
@@ -30,6 +29,7 @@ function ProfesoresView() {
   return (
     <div className="container">
     <GridProfesores service={service} profesores={profesores} setProfesores={setProfesores} setProfesorToEdit={setProfesorToEdit} profesorToEdit={profesorToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+    <FormProfesores service={service} profesores={profesores} setProfesores={setProfesores} setProfesorToEdit={setProfesorToEdit} profesorToEdit={profesorToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
     </div>
   );
 }

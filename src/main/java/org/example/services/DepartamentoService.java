@@ -97,7 +97,9 @@ public class DepartamentoService implements MyInterfaceBBDD<Departamento> {
     public List<Departamento> findAll() {
         setUp();
         try {
-            return em.createQuery("SELECT d FROM Departamento d",Departamento.class).getResultList();
+            List<Departamento> departamentos = em.createQuery("SELECT d FROM Departamento d",Departamento.class).getResultList();
+            departamentos.size();
+            return departamentos;
         } catch (PersistenceException e) {
             e.printStackTrace();
         } finally {

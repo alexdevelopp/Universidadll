@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../styles.css/grid.css'
 import '../../styles.css/button.css'
 
@@ -12,7 +12,7 @@ const GridProfesores = ({service,profesores,setProfesores,profesorToEdit,setProf
           setProfesores(data)
           console.log(data)
         } catch (error) {
-          console.error('Error al cargar provincias:', error);
+          console.error('Error al cargar profesores:', error);
         }
       };
       updateGrid();
@@ -22,10 +22,10 @@ const GridProfesores = ({service,profesores,setProfesores,profesorToEdit,setProf
       try {
         await service.delete('api/profesores',id);
         //Actualizar lista de provincias sin la eliminada
-        const updatedProvincias = profesores.filter((profesor) => profesor.id !== id);
-        setProfesores(updatedProvincias);
+        const updateProfesores = profesores.filter((profesor) => profesor.id !== id);
+        setProfesores(updateProfesores);
       } catch (error) {
-        console.error('Error al eliminar provincias:', error);
+        console.error('Error al eliminar el profesor:', error);
       }
     }
     
