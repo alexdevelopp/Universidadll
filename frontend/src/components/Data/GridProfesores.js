@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import '../../styles.css/grid.css'
 import '../../styles.css/button.css'
 
-const GridProfesores = ({service,profesores,setProfesores,profesorToEdit,setProfesorToEdit,isEditing,setIsEditing}) => {
- 
+const GridProfesores = ({setForceUpdate,forceUpdate,service,profesores,setProfesores,profesorToEdit,setProfesorToEdit,isEditing,setIsEditing}) => {
+
+
 
     useEffect(() => {
       const updateGrid = async () => {
@@ -16,6 +17,7 @@ const GridProfesores = ({service,profesores,setProfesores,profesorToEdit,setProf
         }
       };
       updateGrid();
+      //eslint-disable-next-line
     }, [setProfesores]);
   
     const deleteProfesor = async (id) => {
@@ -28,6 +30,8 @@ const GridProfesores = ({service,profesores,setProfesores,profesorToEdit,setProf
         console.error('Error al eliminar el profesor:', error);
       }
     }
+
+  
     
   
     // Cuando le damos a modificar en el grid
@@ -35,6 +39,7 @@ const GridProfesores = ({service,profesores,setProfesores,profesorToEdit,setProf
       const profesor = profesores.find((profesor) => profesor.id === id);
       setProfesorToEdit(profesor);
       setIsEditing(true);
+      setForceUpdate(prev => !prev);
     };
   
     //Mostrar datos en el grid

@@ -4,19 +4,20 @@ import '../../styles.css/button.css'
 
 
 
-const FormProfesores = ({service,profesorToEdit,isEditing,setIsEditing,setProfesores,provinciaToEdit}) => {
+const FormProfesores = ({forceUpdate,setForceUpdate,service,profesorToEdit,isEditing,setIsEditing,setProfesores}) => {
   
   const [name, setName] = useState('');
   const [provincias, setProvincias] = useState([]);
   const [selectedProvincia, setSelectedProvincia] = useState('');
 
   useEffect(() => {
-    if (profesorToEdit) {
-      console.log(profesorToEdit.provincia.nombre)
-      setName(profesorToEdit.nombre);
-      setSelectedProvincia(profesorToEdit.provincia)
+    if (profesorToEdit || forceUpdate) {
+      setName(profesorToEdit?.nombre || '');
+      setSelectedProvincia(profesorToEdit?.provincia?.nombre || '');
+      setForceUpdate(false); 
     }
-  }, [profesorToEdit]);
+    //eslint-disable-next-line
+  }, [profesorToEdit, forceUpdate]);
 
   //Cargar provincias en el Select
   useEffect(() => {
@@ -31,11 +32,6 @@ const FormProfesores = ({service,profesorToEdit,isEditing,setIsEditing,setProfes
     getProvincias();
     // eslint-disable-next-line
   }, [setProvincias]);
-
-  //Obtiene la provincia seleccionada
-  const handleProvinciaChange = (event) => {
-    setSelectedProvincia(event.target.value);
-  };
 
   //Detecta los cambios en el formulario
   const handleNameChange = (event) => {
@@ -80,14 +76,14 @@ const FormProfesores = ({service,profesorToEdit,isEditing,setIsEditing,setProfes
   </div>
   <div className='input-container'>
     <label htmlFor="provincia" className='custom-label'>Provincia:</label>
-    <select id="provincia" value={selectedProvincia} onChange={handleProvinciaChange} className='custom-select'>
-      <option value={selectedProvincia}>Selecciona una provincia</option>
-      {provincias.map((provincia) => (
-        <option key={provincia.id} value={provincia.id}>
-        {provincia.nombre}
-      </option>
-      ))}
-    </select>
+    <select id="provincia" value={selectedProvincia} onChange={e => setSelectedProvincia(e.target.value)}  className='custom-select'>
+  <option value=''>Selecciona una provincia</option>
+  {provincias.map((provincia) => (
+    <option key={provincia.id} value={provincia.nombre}>
+      {provincia.nombre}
+    </option>
+  ))}
+</select>
   </div>
   <div className='button-container'>
     <button type="submit" className='submit-form'>

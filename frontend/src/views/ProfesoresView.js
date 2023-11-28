@@ -23,13 +23,15 @@ function ProfesoresView() {
     // Estado para indicar si estamos editando o guardando uno nuevo
     const [isEditing, setIsEditing] = useState(false);
 
+    const [forceUpdate, setForceUpdate] = useState(false);
+
 
 
 
   return (
     <div className="container">
-    <GridProfesores service={service} profesores={profesores} setProfesores={setProfesores} setProfesorToEdit={setProfesorToEdit} profesorToEdit={profesorToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
-    <FormProfesores service={service} profesores={profesores} setProfesores={setProfesores} setProfesorToEdit={setProfesorToEdit} profesorToEdit={profesorToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+    <GridProfesores forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} profesores={profesores} setProfesores={setProfesores} setProfesorToEdit={setProfesorToEdit} profesorToEdit={profesorToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+    <FormProfesores forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} profesores={profesores} setProfesores={setProfesores} setProfesorToEdit={setProfesorToEdit} profesorToEdit={profesorToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
     </div>
   );
 }
