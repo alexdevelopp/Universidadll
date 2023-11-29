@@ -2,7 +2,7 @@ import ApiService from '../components/Api/ApiService';
 import Constants from '../components/Api/Constants';
 import GridProfesores from '../components/Data/GridProfesores';
 import FormProfesores from '../components/Forms/FormProfesores';
-import '../styles.css/views.css/provinciaView.css';
+import '../styles.css/views.css/view.css';
 import { useState} from 'react';
 
 

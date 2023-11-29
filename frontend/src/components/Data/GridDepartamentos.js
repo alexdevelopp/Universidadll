@@ -5,38 +5,38 @@ import '../../styles.css/button.css'
 
 
 
-const GridProvincias = ({setForceUpdate,service,provincias,setProvincias,setProvinciaToEdit,setIsEditing}) => {
+const GridDepartamentos = ({setForceUpdate,service,departamentos,setDepartamentos,setDepartamentoToEdit,setIsEditing}) => {
  
 
   useEffect(() => {
     const updateGrid = async () => {
       try {
-        const data = await service.getAll('api/provincias');
-        setProvincias(data)
+        const data = await service.getAll('api/departamentos');
+        setDepartamentos(data)
       } catch (error) {
-        console.error('Error al cargar provincias:', error);
+        console.error('Error al cargar departamentos:', error);
       }
     };
     updateGrid();
     //eslint-disable-next-line
-  }, [setProvincias]);
+  }, [setDepartamentos]);
 
-  const deleteProvincia = async (id) => {
+  const deleteDepartamentos = async (id) => {
     try {
-      await service.delete('api/provincias',id);
-      //Actualizar lista de provincias sin la eliminada
-      const updatedProvincias = provincias.filter((provincia) => provincia.id !== id);
-      setProvincias(updatedProvincias);
+      await service.delete('api/departamentos',id);
+      //Actualizar lista de departamentos sin la eliminada
+      const updatedDepartamentos = departamentos.filter((departamento) => departamento.id !== id);
+      setDepartamentos(updatedDepartamentos);
     } catch (error) {
-      console.error('Error al eliminar provincias:', error);
+      console.error('Error al eliminar departamento:', error);
     }
   }
   
 
   // Cuando le damos a modificar en el grid
   const handleEdit = (id) => {
-    const provincia = provincias.find((provincia) => provincia.id === id);
-    setProvinciaToEdit(provincia);
+    const departamento = departamentos.find((departamento) => departamento.id === id);
+    setDepartamentoToEdit(departamento);
     setIsEditing(true);
     setForceUpdate(prev => !prev);
   };
@@ -47,16 +47,16 @@ const GridProvincias = ({setForceUpdate,service,provincias,setProvincias,setProv
     { key: 'nombre', name: 'Nombre'}
   ];
 
-  const rows = provincias.map(provincia => ({
-    id: provincia.id,
-    nombre: provincia.nombre
+  const rows = departamentos.map(departamento => ({
+    id: departamento.id,
+    nombre: departamento.nombre
   }));
 
 
 
   return (
     <div className='grid-container'>
-    <h2 className='title-grid'>Lista de Provincias</h2>
+    <h2 className='title-grid'>Lista de Departamentos</h2>
     <div className="grid-wrapper">
       <table className="my-grid">
         <thead>
@@ -74,7 +74,7 @@ const GridProvincias = ({setForceUpdate,service,provincias,setProvincias,setProv
                 <td key={`${row.id}-${column.key}`}>{row[column.key]}</td>
               ))}
               <td>
-                <button onClick={() => deleteProvincia(row.id)} className="eliminar">
+                <button onClick={() => deleteDepartamentos(row.id)} className="eliminar">
                   Eliminar
                 </button>
               </td>
@@ -92,4 +92,4 @@ const GridProvincias = ({setForceUpdate,service,provincias,setProvincias,setProv
   );
 };
 
-export default GridProvincias;
+export default GridDepartamentos;

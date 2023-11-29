@@ -2,7 +2,7 @@ import ApiService from '../components/Api/ApiService';
 import Constants from '../components/Api/Constants';
 import GridProvincias from '../components/Data/GridProvincias';
 import FormProvincia from '../components/Forms/FormProvincia';
-import '../styles.css/views.css/provinciaView.css';
+import '../styles.css/views.css/view.css';
 import { useState} from 'react';
 
 
@@ -23,13 +23,15 @@ function ProvinciasView() {
     // Estado para indicar si estamos editando o guardando uno nuevo
     const [isEditing, setIsEditing] = useState(false);
 
+    const [forceUpdate, setForceUpdate] = useState(false);
+
 
 
 
   return (
     <div className="container">
-    <GridProvincias service={service} provincias={provincias} setProvincias={setProvincias} setProvinciaToEdit={setProvinciaToEdit} provinciaToEdit={provinciaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
-    <FormProvincia  service={service} setProvincias={setProvincias} provinciaToEdit={provinciaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+    <GridProvincias setForceUpdate={setForceUpdate} service={service} provincias={provincias} setProvincias={setProvincias} setProvinciaToEdit={setProvinciaToEdit} provinciaToEdit={provinciaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+    <FormProvincia  setForceUpdate={setForceUpdate} forceUpdate={forceUpdate} service={service} setProvincias={setProvincias} provinciaToEdit={provinciaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
     </div>
   );
 }

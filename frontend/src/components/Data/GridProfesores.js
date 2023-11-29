@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import '../../styles.css/grid.css'
 import '../../styles.css/button.css'
 
-const GridProfesores = ({setForceUpdate,forceUpdate,service,profesores,setProfesores,profesorToEdit,setProfesorToEdit,isEditing,setIsEditing}) => {
+const GridProfesores = ({setForceUpdate,service,profesores,setProfesores,setProfesorToEdit,setIsEditing}) => {
 
 
 

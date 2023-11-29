@@ -13,7 +13,11 @@ const FormProfesores = ({forceUpdate,setForceUpdate,service,profesorToEdit,isEdi
   useEffect(() => {
     if (profesorToEdit || forceUpdate) {
       setName(profesorToEdit?.nombre || '');
-      setSelectedProvincia(profesorToEdit?.provincia?.nombre || '');
+      // Buscar la provincia correspondiente al ID del profesor
+    const provinciaSeleccionada = provincias.find(
+      provincia => provincia.id === profesorToEdit?.provincia?.id
+    );
+      setSelectedProvincia(provinciaSeleccionada);
       setForceUpdate(false); 
     }
     //eslint-disable-next-line
@@ -41,14 +45,17 @@ const FormProfesores = ({forceUpdate,setForceUpdate,service,profesorToEdit,isEdi
   //Cuando se lanza el formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const newProfesor = {
-      nombre: name,
-      provincia: {
-        id: selectedProvincia
-      }
-    };
+    console.log()
+  const newProfesor = {
+    nombre: name,
+    provincia: {
+      id: selectedProvincia.id, 
+      nombre: selectedProvincia.nombre
+    }
+  };
+
     if (isEditing) {
-      await service.update('api/provincias',profesorToEdit.id,newProfesor);
+      await service.update('api/profesores',profesorToEdit.id,newProfesor);
       const updateProfesores = await service.getAll('api/profesores');
       console.log("Modificacion conseguida!")
       setProfesores(updateProfesores);
@@ -60,12 +67,14 @@ const FormProfesores = ({forceUpdate,setForceUpdate,service,profesorToEdit,isEdi
       setProfesores(updateProfesores);
     }
     setName('');
+    setSelectedProvincia('')
   };
 
   //Boton cancelar 
   const handleCancel = () => {
     setName(''); 
     setIsEditing(false);
+    setSelectedProvincia('')
   };
 
   return (
@@ -76,7 +85,12 @@ const FormProfesores = ({forceUpdate,setForceUpdate,service,profesorToEdit,isEdi
   </div>
   <div className='input-container'>
     <label htmlFor="provincia" className='custom-label'>Provincia:</label>
-    <select id="provincia" value={selectedProvincia} onChange={e => setSelectedProvincia(e.target.value)}  className='custom-select'>
+<select
+  id="provincia"
+  value={selectedProvincia ? selectedProvincia.nombre : ''} 
+  onChange={(e) => setSelectedProvincia(provincias.find(p => p.nombre === e.target.value))} 
+  className='custom-select'
+>
   <option value=''>Selecciona una provincia</option>
   {provincias.map((provincia) => (
     <option key={provincia.id} value={provincia.nombre}>

@@ -4,17 +4,17 @@ import '../../styles.css/button.css'
 
 
 
-const FormProvincia = ({forceUpdate,setForceUpdate,service,provinciaToEdit,isEditing,setIsEditing,setProvincias}) => {
+const FormDepartamento = ({setForceUpdate,forceUpdate,service,departamentoToEdit,isEditing,setIsEditing,setDepartamentos}) => {
   
   const [name, setName] = useState('');
 
   useEffect(() => {
-    if (provinciaToEdit || forceUpdate) {
-      setName(provinciaToEdit.nombre);
-      setForceUpdate(false); 
+    if (departamentoToEdit || forceUpdate) {
+      setName(departamentoToEdit.nombre);
+      setForceUpdate()
     }
     //eslint-disable-next-line
-  }, [provinciaToEdit,forceUpdate]);
+  }, [departamentoToEdit,forceUpdate]);
 
   //Detecta los cambios en el formulario
   const handleNameChange = (event) => {
@@ -24,18 +24,18 @@ const FormProvincia = ({forceUpdate,setForceUpdate,service,provinciaToEdit,isEdi
   //Cuando se lanza el formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const newProvincia = {nombre: name}
+    const newDepartamento = {nombre: name}
     if (isEditing) {
-      await service.update('api/provincias',provinciaToEdit.id,newProvincia);
-      const updatedProvincias = await service.getAll('api/provincias');
+      await service.update('api/departamentos',departamentoToEdit.id,newDepartamento);
+      const updatedDepartamentos = await service.getAll('api/departamentos');
       console.log("Modificacion conseguida!")
-      setProvincias(updatedProvincias);
+      setDepartamentos(updatedDepartamentos);
       setIsEditing(false)
     } else {
-      await service.create('api/provincias',newProvincia); 
+      await service.create('api/departamentos',newDepartamento); 
       console.log("Insertacion conseguida!")
-      const updatedProvincias = await service.getAll('api/provincias');
-      setProvincias(updatedProvincias);
+      const updatedDepartamentos = await service.getAll('api/departamentos');
+      setDepartamentos(updatedDepartamentos);
     }
     setName('');
   };
@@ -49,7 +49,7 @@ const FormProvincia = ({forceUpdate,setForceUpdate,service,provinciaToEdit,isEdi
   return (
     <form className='my-form' onSubmit={handleSubmit}>
       <div>
-        <label className="custom-label" htmlFor="name">Nombre:</label>
+        <label className='custom-label' htmlFor="name">Nombre:</label>
         <input       type="text"      id="name"    value={name} onChange={handleNameChange}/>
       </div>
       <div className='button-container'>
@@ -64,4 +64,4 @@ const FormProvincia = ({forceUpdate,setForceUpdate,service,provinciaToEdit,isEdi
   );
 };
 
-export default FormProvincia;
+export default FormDepartamento;
