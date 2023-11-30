@@ -69,6 +69,7 @@ public class AlumnoService implements MyInterfaceBBDD<Alumno> {
             if (alumnoAmodificar != null) {
                 setUp();
                 alumnoAmodificar.setNombre(alumno.getNombre());
+                alumnoAmodificar.setCurso(alumno.getCurso());
                 em.merge(alumnoAmodificar);
             }
         } catch (PersistenceException e) {
@@ -100,7 +101,6 @@ public class AlumnoService implements MyInterfaceBBDD<Alumno> {
         setUp();
         try {
             List<Alumno> alumnos = em.createQuery("SELECT a FROM Alumno a",Alumno.class).getResultList();
-            alumnos.size();
             return alumnos;
         } catch (PersistenceException e) {
             e.printStackTrace();

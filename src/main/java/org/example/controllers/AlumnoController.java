@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.clases.Alumno;
-import org.example.clases.Curso;
 import org.example.dtos.alumno.CreateDtoAlumno;
-import org.example.dtos.curso.CreateDtoCurso;
+import org.example.dtos.alumno.UpdateDtoAlumno;
 import org.example.services.AlumnoService;
+import org.example.services.CursoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/alumnos")
 public class AlumnoController {
     private final AlumnoService alumnoService;
-    public AlumnoController(AlumnoService alumnoService){
+    private final CursoService cursoService;
+    public AlumnoController(AlumnoService alumnoService,CursoService cursoService){
         super();
+        this.cursoService = cursoService;
         this.alumnoService = alumnoService;
     }
 
@@ -48,11 +50,13 @@ public class AlumnoController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id,@RequestBody CreateDtoAlumno createDtoAlumno){
+    public ResponseEntity<?> update(@PathVariable Integer id,@RequestBody UpdateDtoAlumno updateDtoAlumno){
         var alumno = alumnoService.find(id);
         if(alumno == null)
             return new ResponseEntity<>("No se encontró el alumno.",HttpStatus.NOT_FOUND);
-        alumno.setNombre(createDtoAlumno.nombre());
+        alumno.setNombre(updateDtoAlumno.nombre());
+        var curso = cursoService.find(updateDtoAlumno.curso_id());
+        alumno.setCurso(curso);
         alumnoService.update(id,alumno);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

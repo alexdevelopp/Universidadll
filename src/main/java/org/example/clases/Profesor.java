@@ -12,7 +12,7 @@ public class Profesor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "provincia_id")
     private Provincia provincia;
     @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)

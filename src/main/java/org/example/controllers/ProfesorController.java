@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.example.clases.Profesor;
 import org.example.dtos.profesor.CreateDtoProfesor;
+import org.example.dtos.profesor.UpdateDtoProfesor;
 import org.example.services.ProfesorService;
+import org.example.services.ProvinciaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/profesores")
 public class ProfesorController {
     private final ProfesorService profesorService;
-    public ProfesorController(ProfesorService profesorService){
+    private final ProvinciaService provinciaService;
+    public ProfesorController(ProfesorService profesorService,ProvinciaService provinciaService){
         super();
         this.profesorService = profesorService;
+        this.provinciaService = provinciaService;
     }
 
     @GetMapping("")
@@ -46,11 +50,13 @@ public class ProfesorController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id,@RequestBody CreateDtoProfesor createDtoProfesor){
+    public ResponseEntity<?> update(@PathVariable Integer id,@RequestBody UpdateDtoProfesor updateDtoProfesor){
         var profesor = profesorService.find(id);
         if(profesor == null)
             return new ResponseEntity<>("No se encontró el profesor.",HttpStatus.NOT_FOUND);
-        profesor.setNombre(createDtoProfesor.nombre());
+        profesor.setNombre(updateDtoProfesor.nombre());
+        var provincia = provinciaService.find(updateDtoProfesor.provincia_id());
+        profesor.setProvincia(provincia);
         profesorService.update(id,profesor);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

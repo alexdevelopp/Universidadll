@@ -93,12 +93,11 @@ public class ProvinciaService implements MyInterfaceBBDD<Provincia> {
         setUp();
         try {
             var provincias = em.createQuery("select p from Provincia p",Provincia.class).getResultList();
-            close();
             return provincias;
         } catch (PersistenceException e) {
             e.printStackTrace();
         } finally {
-            if (em.isOpen())close();
+            close();
         }
         return new ArrayList<>();
     }

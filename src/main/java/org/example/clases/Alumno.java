@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
-@JsonIgnoreProperties(value = {"cursoId"})
+@JsonIgnoreProperties(value = {"curso"})
 public class Alumno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

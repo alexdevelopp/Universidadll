@@ -11,7 +11,7 @@ public class Departamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
-    @OneToMany(mappedBy = "departamento",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "departamento",cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     private List<Curso> cursos;
 
     public Departamento() {

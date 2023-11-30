@@ -69,6 +69,7 @@ public class ProfesorService implements MyInterfaceBBDD<Profesor> {
             if (profesorAmodificar != null) {
                 setUp();
                 profesorAmodificar.setNombre(profesor.getNombre());
+                profesorAmodificar.setProvincia(profesor.getProvincia());
                 em.merge(profesorAmodificar);
             }
         } catch (PersistenceException e) {
@@ -100,7 +101,6 @@ public class ProfesorService implements MyInterfaceBBDD<Profesor> {
         setUp();
         try {
             List<Profesor> profesores = em.createQuery("SELECT p FROM Profesor p",Profesor.class).getResultList();
-            profesores.size();
             return profesores;
         } catch (PersistenceException e) {
             e.printStackTrace();

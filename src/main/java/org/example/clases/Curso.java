@@ -12,14 +12,14 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "departamento_id")
     private Departamento departamento;
-    @OneToMany(mappedBy = "curso",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "curso",cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     private List<Alumno> alumnos;
-    @ManyToMany(mappedBy = "cursos",cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "cursos",cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     private List<Profesor> profesores;
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinTable(
             name = "curso_asignatura",
             joinColumns = @JoinColumn(name = "curso_id"),

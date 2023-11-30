@@ -68,6 +68,7 @@ public class CursoService implements MyInterfaceBBDD<Curso> {
             if (cursoAmodificar != null) {
                 setUp();
                 cursoAmodificar.setNombre(curso.getNombre());
+                cursoAmodificar.setDepartamento(curso.getDepartamento());
                 em.merge(cursoAmodificar);
             }
         } catch (PersistenceException e) {
@@ -100,7 +101,6 @@ public class CursoService implements MyInterfaceBBDD<Curso> {
         setUp();
         try {
             List<Curso>cursos = em.createQuery("SELECT c FROM Curso c",Curso.class).getResultList();
-            cursos.size();
             return cursos;
         } catch (PersistenceException e) {
             e.printStackTrace();

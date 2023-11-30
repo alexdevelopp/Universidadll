@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import org.example.clases.Curso;
 import org.example.dtos.curso.CreateDtoCurso;
+import org.example.dtos.curso.UpdateDtoCurso;
 import org.example.services.CursoService;
+import org.example.services.DepartamentoService;
+
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/cursos")
 public class CursoController {
     private final CursoService cursoService;
-    public CursoController(CursoService cursoService){
+    private final DepartamentoService departamentoService;
+    public CursoController(CursoService cursoService,DepartamentoService departamentoService){
         super();
+        this.departamentoService = departamentoService;
         this.cursoService = cursoService;
     }
 
@@ -25,7 +30,7 @@ public class CursoController {
         var cursos = cursoService.findAll();
         List<CreateDtoCurso> cursosDtoList = new ArrayList<>();
         for (Curso curso : cursos) {
-            var dto = new CreateDtoCurso(curso.getNombre(), curso.getDepartamento());
+            var dto = new CreateDtoCurso(curso.getId(),curso.getNombre(), curso.getDepartamento());
             cursosDtoList.add(dto);
         }
         return new ResponseEntity<>(cursosDtoList, HttpStatus.OK);
@@ -46,11 +51,13 @@ public class CursoController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id,@RequestBody CreateDtoCurso createDtoCurso){
+    public ResponseEntity<?> update(@PathVariable Integer id,@RequestBody UpdateDtoCurso updateDtoCurso){
         var curso = cursoService.find(id);
         if(curso == null)
             return new ResponseEntity<>("No se encontró el curso.",HttpStatus.NOT_FOUND);
-        curso.setNombre(createDtoCurso.nombre());
+        curso.setNombre(updateDtoCurso.nombre());
+        var departamento = departamentoService.find(updateDtoCurso.departamento_id());
+        curso.setDepartamento(departamento);
         cursoService.update(id,curso);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
