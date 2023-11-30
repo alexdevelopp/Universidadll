@@ -48,10 +48,7 @@ const FormProfesores = ({forceUpdate,setForceUpdate,service,profesorToEdit,isEdi
     console.log()
   const newProfesor = {
     nombre: name,
-    provincia: {
-      id: selectedProvincia.id, 
-      nombre: selectedProvincia.nombre
-    }
+    provincia_id: selectedProvincia.id
   };
 
     if (isEditing) {

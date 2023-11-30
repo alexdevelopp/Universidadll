@@ -45,17 +45,13 @@ const FormCurso = ({forceUpdate,setForceUpdate,service,cursoToEdit,isEditing,set
   //Cuando se lanza el formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log()
   const newCurso = {
     nombre: name,
-    departamento: {
-      id: selectedDepartamento.id, 
-      nombre: selectedDepartamento.nombre
-    }
+    departamento_id: selectedDepartamento.id
   };
-
     if (isEditing) {
-      await service.update('api/departamentos',cursoToEdit.id,newCurso);
+      console.log(newCurso)
+      await service.update('api/cursos',cursoToEdit.id,newCurso);
       const updateCursos = await service.getAll('api/cursos');
       console.log("Modificacion conseguida!")
       setCursos(updateCursos);

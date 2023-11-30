@@ -3,7 +3,7 @@ package org.example.controllers;
 import java.util.ArrayList;
 
 import org.example.clases.Curso;
-import org.example.dtos.curso.CreateDtoCurso;
+import org.example.dtos.curso.CursoDto;
 import org.example.dtos.curso.UpdateDtoCurso;
 import org.example.services.CursoService;
 import org.example.services.DepartamentoService;
@@ -28,9 +28,9 @@ public class CursoController {
     @GetMapping("")
     public ResponseEntity<?> getAll(){
         var cursos = cursoService.findAll();
-        List<CreateDtoCurso> cursosDtoList = new ArrayList<>();
+        List<CursoDto> cursosDtoList = new ArrayList<>();
         for (Curso curso : cursos) {
-            var dto = new CreateDtoCurso(curso.getId(),curso.getNombre(), curso.getDepartamento());
+            var dto = new CursoDto(curso.getId(),curso.getNombre(), curso.getDepartamento());
             cursosDtoList.add(dto);
         }
         return new ResponseEntity<>(cursosDtoList, HttpStatus.OK);
@@ -46,8 +46,9 @@ public class CursoController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> create(@RequestBody CreateDtoCurso createDtoCurso){
-        cursoService.add(new Curso(createDtoCurso.nombre(),createDtoCurso.departamento()));
+    public ResponseEntity<?> create(@RequestBody UpdateDtoCurso updateDtoCurso){
+        var departamento = departamentoService.find(updateDtoCurso.departamento_id());
+        cursoService.add(new Curso(updateDtoCurso.nombre(),departamento));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping("/{id}")

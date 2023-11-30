@@ -63,14 +63,9 @@ public class CursoService implements MyInterfaceBBDD<Curso> {
 
     @Override
     public void update(Integer id, Curso curso) {
+        setUp();
         try {
-            Curso cursoAmodificar = find(id);
-            if (cursoAmodificar != null) {
-                setUp();
-                cursoAmodificar.setNombre(curso.getNombre());
-                cursoAmodificar.setDepartamento(curso.getDepartamento());
-                em.merge(cursoAmodificar);
-            }
+             em.merge(curso);
         } catch (PersistenceException e) {
             e.printStackTrace();
         } finally {

@@ -64,14 +64,9 @@ public class ProfesorService implements MyInterfaceBBDD<Profesor> {
 
     @Override
     public void update(Integer id, Profesor profesor) {
+        setUp();
         try {
-            Profesor profesorAmodificar = find(id);
-            if (profesorAmodificar != null) {
-                setUp();
-                profesorAmodificar.setNombre(profesor.getNombre());
-                profesorAmodificar.setProvincia(profesor.getProvincia());
-                em.merge(profesorAmodificar);
-            }
+                em.merge(profesor);
         } catch (PersistenceException e) {
             e.printStackTrace();
         } finally {

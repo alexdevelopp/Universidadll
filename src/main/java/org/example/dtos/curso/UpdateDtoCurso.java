@@ -1,5 +1,5 @@
 package org.example.dtos.curso;
 
-public record UpdateDtoCurso(Integer id, String nombre, Integer departamento_id) {
+public record UpdateDtoCurso( String nombre, Integer departamento_id) {
     
 }
