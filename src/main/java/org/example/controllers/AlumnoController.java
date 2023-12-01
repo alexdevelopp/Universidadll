@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.clases.Alumno;
-import org.example.dtos.alumno.CreateDtoAlumno;
+import org.example.dtos.alumno.AlumnoDto;
 import org.example.dtos.alumno.UpdateDtoAlumno;
 import org.example.services.AlumnoService;
 import org.example.services.CursoService;
@@ -27,9 +27,9 @@ public class AlumnoController {
     @GetMapping("")
     public ResponseEntity<?> getAll(){
         var alumnos = alumnoService.findAll();
-        List<CreateDtoAlumno> alumnosDtoList = new ArrayList<>();
+        List<AlumnoDto> alumnosDtoList = new ArrayList<>();
         for (Alumno alumno : alumnos) {
-            var dto = new CreateDtoAlumno(alumno.getId(),alumno.getNombre(), alumno.getCurso());
+            var dto = new AlumnoDto(alumno.getId(),alumno.getNombre(), alumno.getCurso());
             alumnosDtoList.add(dto);
         }
         return new ResponseEntity<>(alumnosDtoList, HttpStatus.OK);
@@ -45,8 +45,9 @@ public class AlumnoController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> create(@RequestBody CreateDtoAlumno createDtoAlumno){
-        alumnoService.add(new Alumno(createDtoAlumno.nombre(),createDtoAlumno.curso()));
+    public ResponseEntity<?> create(@RequestBody UpdateDtoAlumno updateDtoAlumno){
+        var curso = cursoService.find(updateDtoAlumno.curso_id());
+        alumnoService.add(new Alumno(updateDtoAlumno.nombre(),curso));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
