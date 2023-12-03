@@ -4,6 +4,8 @@ import GridProfesores from '../components/Data/GridProfesores';
 import FormProfesores from '../components/Forms/FormProfesores';
 import '../styles.css/views.css/view.css';
 import { useState} from 'react';
+import Header from "../components/Header/Header";
+import RouteView from '../components/Menu/RouteView';
 
 
 
@@ -30,7 +32,12 @@ function ProfesoresView() {
 
   return (
     <div className="container">
+      <Header/>
+      <div className='menu-grid'>
+     <RouteView/>
     <GridProfesores forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} profesores={profesores} setProfesores={setProfesores} setProfesorToEdit={setProfesorToEdit} profesorToEdit={profesorToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+      </div>
+     
     <FormProfesores forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} profesores={profesores} setProfesores={setProfesores} setProfesorToEdit={setProfesorToEdit} profesorToEdit={profesorToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
     </div>
   );

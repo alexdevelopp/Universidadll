@@ -1,18 +1,26 @@
 .container{
-  display: flex;
   justify-content: center; 
   align-items: center; 
   height: 100vh;
   width: 100%;
-  flex-direction: column;
 }
 
 .links-container {
   display: flex;
+  flex: 1;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
+  padding: 20px;
   height: 100%;
-  width: 50%;
+  width: 20%;
 } 
+
+body, #root { 
+  margin: 0;
+  padding: 0;
+}
+
+.menu-grid{
+  display: flex;
+  width: 100%;
+}

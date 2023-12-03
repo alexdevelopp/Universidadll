@@ -4,6 +4,8 @@ import GridDepartamentos from '../components/Data/GridDepartamentos';
 import FormDepartamentos from '../components/Forms/FormDepartamento';
 import '../styles.css/views.css/view.css';
 import { useState} from 'react';
+import Header from "../components/Header/Header";
+import RouteView from '../components/Menu/RouteView';
 
 
 
@@ -30,7 +32,12 @@ const [forceUpdate, setForceUpdate] = useState(false);
 
 return (
 <div className="container">
+<Header/>
+<div className='menu-grid'>
+    <RouteView/>
 <GridDepartamentos forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} departamentos={departamentos} setDepartamentos={setDepartamentos} setDepartamentoToEdit={setDepartamentoToEdit} departamentoToEdit={departamentoToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+      </div>
+
 <FormDepartamentos forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} departamentos={departamentos} setDepartamentos={setDepartamentos} setDepartamentoToEdit={setDepartamentoToEdit} departamentoToEdit={departamentoToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
 </div>
 );

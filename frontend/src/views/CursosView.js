@@ -4,6 +4,8 @@ import GridCursos from '../components/Data/GridCursos';
 import FormCurso from '../components/Forms/FormCurso';
 import '../styles.css/views.css/view.css';
 import { useState} from 'react';
+import Header from "../components/Header/Header";
+import RouteView from '../components/Menu/RouteView';
 
 
 
@@ -30,7 +32,12 @@ function CursosView() {
 
   return (
     <div className="container">
+      <Header/>
+      <div className='menu-grid'>
+        <RouteView/>
     <GridCursos forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} cursos={cursos} setCursos={setCursos} setCursoToEdit={setCursoToEdit} cursoToEdit={cursoToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+      </div>
+      
     <FormCurso forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} cursos={cursos} setCursos={setCursos} setCursoToEdit={setCursoToEdit} cursoToEdit={cursoToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
     </div>
   );

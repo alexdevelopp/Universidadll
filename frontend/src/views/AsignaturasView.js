@@ -4,6 +4,8 @@ import GridAsignaturas from '../components/Data/GridAsignaturas';
 import FormAsignatura from '../components/Forms/FormAsignatura';
 import '../styles.css/views.css/view.css';
 import { useState} from 'react';
+import Header from "../components/Header/Header";
+import RouteView from '../components/Menu/RouteView';
 
 
 
@@ -30,7 +32,13 @@ function AsignaturasView() {
 
   return (
     <div className="container">
+      <Header/>
+      <div className='menu-grid'>
+<RouteView/>
     <GridAsignaturas setForceUpdate={setForceUpdate} service={service} asignaturas={asignaturas} setAsignaturas={setAsignaturas} setAsignaturaToEdit={setAsignaturaToEdit} asignaturaToEdit={asignaturaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+
+      </div>
+      
     <FormAsignatura  setForceUpdate={setForceUpdate} forceUpdate={forceUpdate} service={service} setAsignaturas={setAsignaturas} asignaturaToEdit={asignaturaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
     </div>
   );

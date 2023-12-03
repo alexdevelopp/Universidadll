@@ -4,6 +4,8 @@ import GridProvincias from '../components/Data/GridProvincias';
 import FormProvincia from '../components/Forms/FormProvincia';
 import '../styles.css/views.css/view.css';
 import { useState} from 'react';
+import Header from "../components/Header/Header";
+import RouteView from '../components/Menu/RouteView';
 
 
 
@@ -30,7 +32,11 @@ function ProvinciasView() {
 
   return (
     <div className="container">
-    <GridProvincias setForceUpdate={setForceUpdate} service={service} provincias={provincias} setProvincias={setProvincias} setProvinciaToEdit={setProvinciaToEdit} provinciaToEdit={provinciaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+      <Header/>
+      <div className='menu-grid'>
+        <RouteView/>
+        <GridProvincias setForceUpdate={setForceUpdate} service={service} provincias={provincias} setProvincias={setProvincias} setProvinciaToEdit={setProvinciaToEdit} provinciaToEdit={provinciaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+      </div>
     <FormProvincia  setForceUpdate={setForceUpdate} forceUpdate={forceUpdate} service={service} setProvincias={setProvincias} provinciaToEdit={provinciaToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
     </div>
   );

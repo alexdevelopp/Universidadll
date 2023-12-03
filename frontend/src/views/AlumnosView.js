@@ -4,6 +4,8 @@ import GridAlumnos from '../components/Data/GridAlumnos';
 import FormAlumno from '../components/Forms/FormAlumno';
 import '../styles.css/views.css/view.css';
 import { useState} from 'react';
+import Header from "../components/Header/Header";
+import RouteView from '../components/Menu/RouteView';
 
 
 
@@ -30,7 +32,13 @@ function AlumnosView() {
 
   return (
     <div className="container">
+      <Header/>
+      <div className='menu-grid'>
+<RouteView/>
     <GridAlumnos forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} alumnos={alumnos} setAlumnos={setAlumnos} setAlumnoToEdit={setAlumnoToEdit} alumnoToEdit={alumnoToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
+
+      </div>
+      
     <FormAlumno forceUpdate={forceUpdate} setForceUpdate={setForceUpdate} service={service} alumnos={alumnos} setAlumnos={setAlumnos} setAlumnoToEdit={setAlumnoToEdit} alumnoToEdit={alumnoToEdit} isEditing={isEditing} setIsEditing={setIsEditing}/>
     </div>
   );
