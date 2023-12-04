@@ -7,8 +7,16 @@ import CursosView from './views/CursosView';
 import AsignaturasView from './views/AsignaturasView';
 import AlumnosView from './views/AlumnosView'
 import MainView from './views/MainView';
+import { useEffect } from 'react';
+
+
 
 const App = () => {
+
+  useEffect(() => {
+    document.title = 'Universidad'; 
+  }, []);
+
   return (
     <Router>
       <Routes>

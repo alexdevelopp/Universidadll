@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.example.clases.Profesor;
-import org.example.dtos.curso.CursoDto;
 import org.example.dtos.profesor.ProfesorDto;
 import org.example.dtos.profesor.UpdateDtoProfesor;
 import org.example.services.ProfesorService;
